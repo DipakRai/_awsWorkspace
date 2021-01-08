@@ -1,0 +1,24 @@
+1. Minimum RTO for a single AZ outage
+RTO for recovery with an RDS Single-AZ instance failure can vary from minutes to hours. The duration depends on the size of the database and the failure and recovery approach required. When we design and plan for failure with an RDS Single-AZ instance, we look at the following scenarios:
+Recoverable instance failure – The individual EC2 node suffered a hardware failure but could be recovered automatically by RDS.
+Non-recoverable instance failure – The individual EC2 node suffered a hardware failure but could not be recovered automatically by RDS.
+EBS volume failure – The EBS volume suffered a data loss failure.
+Availability Zone disruption – Failure at the Availability Zone level that would affect the RDS instance.
+
+2. Minimum RTO for a single region outage
+Falls under the category of DR. The below scenarios apply here:
+a. Back up and restore (RTO can run into hours)
+b. Pilot Light (RTO can run into 10s of minutes)
+c. Warm Standby (RTO runs into minutes)
+d. Multi Site (RTO is real time and hardly takes any time)
+
+3. Minimum RPO for a single AZ outage
+RPO for recovery with an RDS Single-AZ instance failure is typically 5 minutes (the interval required for copying transaction logs to Amazon S3), but it can vary. 
+You can confirm this by calling RDS:describe-db-instances:LatestRestorableTime. This service returns the latest time to which a database can be restored with point-in-time restore.
+
+4. Minimum RPO for a single region outage
+Falls under the category of DR. The below scenarios apply here:
+a. Back up and restore (RPO can run into hours)
+b. Pilot Light (RPO can run into 10s of minutes)
+c. Warm Standby (RPO runs into minutes)
+d. Multi Site (RPO is real time and hardly takes any time)
