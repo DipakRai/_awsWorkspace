@@ -1,0 +1,75 @@
+(base) mulshankar13@hooghly:~/Downloads$ chmod 400 standby-rds.pem
+(base) mulshankar13@hooghly:~/Downloads$ ssh -i "standby-rds.pem" ec2-user@ec2-54-219-169-154.us-west-1.compute.amazonaws.com
+The authenticity of host 'ec2-54-219-169-154.us-west-1.compute.amazonaws.com (54.219.169.154)' can't be established.
+ECDSA key fingerprint is SHA256:JZrmwUAE/fv8Cxo0Cclfw44Xudt0JUeRzRd5C6Wjf4Y.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'ec2-54-219-169-154.us-west-1.compute.amazonaws.com,54.219.169.154' (ECDSA) to the list of known hosts.
+
+       __|  __|_  )
+       _|  (     /   Amazon Linux 2 AMI
+      ___|\___|___|
+
+https://aws.amazon.com/amazon-linux-2/
+2 package(s) needed for security, out of 5 available
+Run "sudo yum update" to apply all updates.
+[ec2-user@ip-10-2-11-217 ~]$ mysql --version
+mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
+[ec2-user@ip-10-2-11-217 ~]$ show databases;
+-bash: show: command not found
+[ec2-user@ip-10-2-11-217 ~]$ mysql -u admin -p -h udacity.ctyzne32dazl.us-west-1.rds.amazonaws.com
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MySQL connection id is 694
+Server version: 8.0.20 Source distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MySQL [(none)]> show databses;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'databses' at line 1
+MySQL [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| udacity            |
++--------------------+
+4 rows in set (0.01 sec)
+
+MySQL [(none)]> connect udacity;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Connection id:    695
+Current database: udacity
+
+MySQL [udacity]> show tables;
++-------------------+
+| Tables_in_udacity |
++-------------------+
+| STUDENTS          |
+| student           |
++-------------------+
+2 rows in set (0.00 sec)
+
+MySQL [udacity]> select * from students;
+ERROR 1146 (42S02): Table 'udacity.students' doesn't exist
+MySQL [udacity]> select * from STUDENTS;
++----+--------+-----+-----------+
+| ID | NAME   | AGE | ADDRESS   |
++----+--------+-----+-----------+
+|  1 | dipak  |  38 | bangalore |
+|  2 | rajani |  38 | bangalore |
+|  3 | papa   |  68 | bangalore |
+|  4 | nabhu  |   6 | bangalore |
++----+--------+-----+-----------+
+4 rows in set (0.00 sec)
+
+MySQL [udacity]> insert into STUDENTS values(5,alpha,2,bangalore)
+    -> ;
+ERROR 1290 (HY000): The MySQL server is running with the --read-only option so it cannot execute this statement
+MySQL [udacity]> 
+
