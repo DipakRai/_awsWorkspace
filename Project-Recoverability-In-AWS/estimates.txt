@@ -7,7 +7,7 @@ EBS volume failure – The EBS volume suffered a data loss failure.
 Availability Zone disruption – Failure at the Availability Zone level that would affect the RDS instance.
 
 2. Minimum RTO for a single region outage
-10 minutes to  
+10 minutes to  1 hr
 Falls under the category of DR. The below scenarios apply here:
 a. Back up and restore (RTO can run into hours)
 b. Pilot Light (RTO can run into 10s of minutes)
