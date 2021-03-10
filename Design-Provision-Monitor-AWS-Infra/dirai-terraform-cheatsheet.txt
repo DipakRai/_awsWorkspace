@@ -1,0 +1,50 @@
+Note: Check the region before creating EC2 instances
+
+
+// create aws key pair
+$aws ec2 create-key-pair --key-name my-ec2-key-pair --query "EC2KeyMaterial" --output text > my-ec2-key-pair.pem
+
+//create aws ec2 instance
+$aws ec2 run-instances --image-id ami-04b1ddd35fd71475a --count 2 --instance-type t2.micro --key-name my-ec2-key-pair --security-group-ids sg-sg-04e7a766 --subnet-id subnet-e1b0dbad
+
+// to set region
+$aws configure set region us-west-1
+
+
+// terminate instance
+$aws ec2 terminate-instances --instance-ids i-099ac0191690851a1 i-0fbc18b6c3f5a23ea
+
+// get the current region 
+$aws configure get region
+
+//create a rds db
+$aws rds create-db-instance --db-instance-identifier test-mysql-instance --db-instance-class db.t3.micro --engine mysql --master-username admin --master-user-password secret99 --allocated-storage 20
+
+
+//delete a rds db
+$aws rds delete-db-instance --db-instance-identifier test-mysql-instance --skip-final-snapshot --delete-automated-backups  --generate-cli-skeleton output
+
+// quickstart build infrastructure with terraform aws steps
+https://learn.hashicorp.com/tutorials/terraform/aws-build
+
+Initialize the aws access and region as below:
+specify a .tf file:
+#terraform.tf
+provider "aws" {
+  access_key = "AKIARCWVMOBOOJG4AD7S"
+  secret_key = "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"
+  region = "ap-south-1"
+}
+
+resource "aws_instance" "Udacity" {
+  ami = "ami-08e0ca9924195beba"
+  instance_type = "t2.micro"
+}
+
+#Steps to create an AWS EC2 instance through terraform
+1. write a terraform file with " provider" and " resource"  section
+2. perform a terraform init
+3. perform a terraform plan 
+4. perform a terraform apply
+
+
