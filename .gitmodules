@@ -1,0 +1,3 @@
+[submodule "Design-Provision-Monitor-AWS-Infra/cand-c2-project"]
+	path = Design-Provision-Monitor-AWS-Infra/cand-c2-project
+	url = https://github.com/DipakRai/_awsWorkspace.git
